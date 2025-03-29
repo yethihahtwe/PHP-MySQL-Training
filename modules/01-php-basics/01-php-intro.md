@@ -9,7 +9,7 @@ PHP is free and open-source and has a large community of developers. It can eail
 
 ## How PHP works
 
-![PHP processing flow](../../resources/images/php-flow.png)
+![PHP processing flow](../../resources/images/php-flow.svg)
 
 When a user opens a PHP page in their browser (or) when a php file is served to the user
 1. The browser sends a request to the web server that I want to see this result.
