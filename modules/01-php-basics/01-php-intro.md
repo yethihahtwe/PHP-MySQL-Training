@@ -4,7 +4,7 @@
 PHP (Hypertext Preprocessor) is a commonly used scripting language specifically for web development. PHP scripts run on the web server and can generate HTML content delivered to the client's web browser.
 
 ## Key properties of PHP
-PHP is a **server side language**. It means PHP codes run on the **web server**, not in the user's browser. PHP can generate **HTML output** which is rendered in client web browser. While PHP can generate HTML, it can be **written inside HTML** as well.  
+PHP is a **server side language**. It means PHP codes run on the **web server**, not in the user's browser. PHP can generate **HTML output** which is rendered in client web browser. While PHP can generate HTML, it can be **written inside HTML** as well.
 PHP is free and open-source and has a large community of developers. It can eaily integrate with most databases especially **MySQL**.
 
 ## How PHP works
@@ -57,7 +57,7 @@ Now, click "Admin" next to MySQL. The browser will open http://localhost/phpmyad
 
 ### Troubleshooting
 On some computers, apache will not start running due to a block port.
-* Click "Config" on the right of Apache. 
+* Click "Config" on the right of Apache.
 * Click "Apache (httpd.conf)".
 * Press Ctrl + F from your keyboard and type `listen 80`
 * Replace 80 with other open port such as `81` or `9080`.
