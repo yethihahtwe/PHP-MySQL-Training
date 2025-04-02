@@ -95,7 +95,7 @@ $ca = 25;
 2. **Consistent naming convention**
 variable names and functions should be given in consistent manner. The following naming conventions are commonly used in PHP.
 
-* `$sname_case` - recommended for PHP
+* `$snake_case` - recommended for PHP
 * `$camelCase` - common in PHP
 * `$PascalCase` - usually given to class names rather than variables
 
