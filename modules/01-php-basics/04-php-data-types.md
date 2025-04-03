@@ -288,4 +288,31 @@ function add(int $a, int $b): int {
 ?>
 ```
 
+4. **Be explicit about type conversion.** Rather than relying on PHP automatic type conversion, it is better to convert to appropriate data types.
+
+5. **Handle NULL values.** Before creating operations, it is better to assign a variable a default value in case it was NULL. For functions, we also need to consider what would be the final result in case the result became NULL.
+
+
 > While PHP's loose data typing may seem flexible, it can also lead to unexpected results if different data types interact each other.
+
+## Summary
+In this lesson, we've covered -
+* PHP's loosely typed system and its implications
+* The eight basic data types in PHP: strings, integers, floats, booleans, arrays, objects, NULL, and resources
+* How to check variable types using functions like `is_int()`, `gettype()`, and `var_dump()`
+* Type casting and conversion between different data types
+* PHP's automatic type conversion and comparison operators
+* Best practices for working with data types in PHP
+
+## Resources
+* [PHP Manual: Types](https://www.php.net/manual/en/language.types.php)
+* [PHP Type Juggling](https://www.php.net/manual/en/language.types.type-juggling.php)
+* [Type Declarations](https://www.php.net/manual/en/language.types.declarations.php)
+
+## Exercises
+1. Create variables of each basic data type and use `var_dump()` to display their types and values.
+2. Write a function that takes a string containing a number (e.g., "42") and returns the number as an integer.
+3. Create an associative array with information about a patient (ID, name, age, active status) and write code to display this information.
+4. Experiment with loose vs. strict comparison by comparing variables of different types with the same value.
+5. Create a simple class representing a client with properties and methods, instantiate an object from this class, and demonstrate accessing its properties and methods.
+```
