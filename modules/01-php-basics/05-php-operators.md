@@ -127,3 +127,52 @@ if ($user_is_logged_in && $is_admin) {
 ```
 > **Note:** The `and` and `or` operators have lower priority than `&&` and `||`.
 > It is safer to use `&&` and `||` to avoid unexpected behavior.
+
+```php
+<?php
+// user input validation
+$username = $_POST['username']; // get data from a form field
+$password = $_POST['password']; // get data from a form field
+
+// && is used here
+$isValid = !empty($username) && strlen($password) >= 8;
+if ($isValid) {
+    // continue with login
+}
+
+// "and" is used here
+$isValid = !empty($username) and strlen($password) >= 8;
+// This will only be interpreted as ($isValid = !empty($username)) and strlen($password) >= 8
+// So $isValid only takes care of !empty($username)
+?>
+```
+
+### Increment/Decrement operators
+Increment and decrement operators are used to increase or decrease the values of a variable.
+
+| Operator | Description | Example | Output |
+|----------|-------------|---------|--------|
+| ++$x | Pre-increment | Increments $x by one, then returns $x |
+| $x++ | Post-increment | Returns $x, then increment by one |
+| --$x | Pre-decrement | Decrements $x by one, then returns $x |
+| $x-- | Post-decrement | Returns $x, then decrements by one |
+
+```php
+<?php
+$x = 5;
+echo ++$x; // $x is incremented then returned as 6
+echo $x; // 6
+
+$y = 5;
+echo $y++; // $y is returned as 5 then incremented
+echo $y; // 6
+
+$a = 5;
+echo --$a; // $a is decremented and returned as 4
+echo $a; // 4
+
+$b = 5;
+echo $b--; // $b is returned as 5 an decremented
+echo $b; // 4
+?>
+```
