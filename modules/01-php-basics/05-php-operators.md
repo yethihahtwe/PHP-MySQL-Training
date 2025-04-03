@@ -49,8 +49,8 @@ $x *= 2; // $x is now 24
 $x /= 4; // $x is now 6
 $x %= 4; // $x is now 2
 
-$name = "Severus";
-$name .= " Snape"; // $name is now "Severus Snape"
+$name = "David";
+$name .= " Beckham"; // $name is now "David Beckham"
 ?>
 ```
 
@@ -87,3 +87,43 @@ var_dump($a <=> $c); // 1
 ?>
 ```
 
+### Logical Operators
+Logical operators are used to combine conditional statements.
+
+| Operator | Description | Example | Output |
+|----------|-------------|---------|--------|
+| and | And | $x and $y | True if both $x and $y are true |
+| or | Or | $x or $y | True if either of $x or $y is true |
+| xor | Exclusive or | $x xor $y | True if either $x or $y is true, but not both |
+| ! | Not | !$x | True if $x is not true |
+| && | And | $x && $y | True if both $x and $y are true |
+| &#124;&#124; | Or | $x &#124;&#124; $y | True if either $x or $y is true |
+
+```php
+<?php
+$a = true;
+$b = false;
+
+var_dump($a && $b); // false
+var_dump($a || $b); // true
+var_dump($a and $b); // false
+var_dump($a or $b); // true
+var_dump($a xor $b); // true
+var_dump(!$a); // false
+
+// Example
+$user_is_logged_in = true;
+$is_admin = false;
+
+if ($user_is_logged_in && $is_admin) {
+    echo "Welcome, Admin!";
+} elseif ($user_is_logged_in) {
+    echo "Welcome, User!";
+} else {
+    echo "Please log in.";
+}
+// Output - "Welcome User!"
+?>
+```
+> **Note:** The `and` and `or` operators have lower priority than `&&` and `||`.
+> It is safer to use `&&` and `||` to avoid unexpected behavior.
