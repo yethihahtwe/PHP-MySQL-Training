@@ -1,44 +1,30 @@
 # Database Structures
 
-## Database Building Blocks
-
-Understanding database structures is essential for effective database design. In this lesson, we'll explore the fundamental components that make up a relational database.
+## Components of a database
 
 ### Tables
 
-Tables are the primary storage structures in relational databases. Think of a table as similar to a spreadsheet:
-
-- Each table stores information about a specific entity (e.g., clients, services, staff)
-- Tables have a name that identifies what data they contain
-- Tables are composed of rows and columns
+Tables are the primary storage components in relational databases. A table as similar to a spreadsheet. Each table stores information about an entity (e.g., clients, services, staff). Tables are composed of rows and columns.
 
 Example of a simple CLIENT table:
 
-| client_id | first_name | last_name | date_of_birth | nationality |
-|-----------|------------|-----------|---------------|-------------|
-| 1         | John       | Doe       | 1985-03-15    | Myanmar     |
-| 2         | Jane       | Smith     | 1990-07-22    | Syria       |
-| 3         | Ahmed      | Hassan    | 1978-11-30    | Somalia     |
+| client_id | first_name | last_name | date_of_birth | nationality | status    |
+|-----------|------------|-----------|---------------|-------------|-----------|
+| 1         | John       | Doe       | 1985-03-15    | Myanmar     | Active    |
+| 2         | Jane       | Smith     | 1990-07-22    | Syria       | Pending   |
+| 3         | Ahmed      | Hassan    | 1978-11-30    | Somalia     | Completed |
 
 ### Columns (Fields)
 
-Columns, also known as fields, define the specific attributes of the entity:
-
-- Each column has a name (e.g., first_name, date_of_birth)
-- Each column has a specific data type (e.g., integer, varchar, date)
-- Columns may have constraints that limit what data can be stored
+Columns, also known as fields, define the properties of the entity. Each column has a name (e.g., first_name, date_of_birth) and has a specific data type (e.g., integer, varchar, date). Columns may have constraints that limit what data can be stored.
 
 ### Rows (Records)
 
-Rows, also called records, contain the actual data:
-
-- Each row represents one instance of the entity (e.g., one client)
-- Rows must follow the structure defined by the columns
-- Each row typically has a unique identifier
+Rows, also called records, contain the actual data. Each row represents one record of the entity (e.g., one client). Rows must follow the structure defined by the columns. Each row has a unique identifier.
 
 ### Data Types
 
-Every column in a database table must have a specified data type. Common MySQL data types include:
+Every column in a database table must have a specified data type. Common MySQL data types are -
 
 | Data Type Category | Examples | Use Cases |
 |--------------------|----------|-----------|
@@ -48,10 +34,11 @@ Every column in a database table must have a specified data type. Common MySQL d
 | Boolean | BOOLEAN (TINYINT(1)) | Active status, eligibility flags |
 | Binary | BLOB, BINARY | Documents, images (though often stored outside DB) |
 
-Choosing the right data type is important for:
-- Data integrity
-- Storage efficiency
-- Query performance
+> The difference between FLOAT and DECIMAL is that DECIMAL stores exact values (ideal for financial data where precision is important), while FLOAT stores approximate values and is more efficient for scientific calculations where absolute precision is less important.
+
+> CHAR has fixed length and is faster for short strings of consistent size, VARCHAR allows variable length up to a maximum and saves space, while TEXT is for large variable-length content with no practical size limit but slower performance.
+
+Choosing the right data type is important for **Data integrity**, **Storage efficiency** and **Query performance**.
 
 ## Keys: The Foundation of Relationships
 

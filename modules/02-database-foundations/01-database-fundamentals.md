@@ -50,7 +50,7 @@ NoSQL ("Not only SQL") databases store and retrieve data in a different way. NoS
 
 A Database Management System is software that interacts with the database, applications, and users to capture and analyze data. Using a DBMS, we can create new databases, store data in the database, modify existing data, retrieve data with queries, manage database security and handle database transactions. MySQL is a DBMS we'll be using throughout this training.
 
-## Practical Example
+## Example
 
 ```
 CLIENT DATABASE
