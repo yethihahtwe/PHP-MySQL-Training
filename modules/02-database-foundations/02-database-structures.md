@@ -36,22 +36,17 @@ Every column in a database table must have a specified data type. Common MySQL d
 
 > The difference between FLOAT and DECIMAL is that DECIMAL stores exact values (ideal for financial data where precision is important), while FLOAT stores approximate values and is more efficient for scientific calculations where absolute precision is less important.
 
-> CHAR has fixed length and is faster for short strings of consistent size, VARCHAR allows variable length up to a maximum and saves space, while TEXT is for large variable-length content with no practical size limit but slower performance.
+> CHAR has fixed length and VARCHAR has variable length. TEXT has large variable-length content with no size limit. CHAR stores string values with fixed size, no more and no less. VARCHAR can store string values of variable length not exceeding the specified upper limit. VARCHAR saves more space than TEXT and since TEXT has no limit, it has slower performance.
 
 Choosing the right data type is important for **Data integrity**, **Storage efficiency** and **Query performance**.
 
-## Keys: The Foundation of Relationships
+## Keys
 
-Keys are special fields that uniquely identify records and establish relationships between tables.
+Keys serve as record id and take care of relationships between tables.
 
 ### Primary Keys
 
-A primary key uniquely identifies each record in a table:
-
-- No two rows can have the same primary key value
-- Primary keys cannot contain NULL values
-- A table can have only one primary key (though it can consist of multiple columns)
-- Common primary keys include IDs or codes
+A primary key is an id of a record.No two rows can have the same primary key value. Primary keys cannot contain NULL values. Like a country has only one national idenfication system for its own nationals, a table can have only one primary key column (though it can consist of multiple columns).
 
 Example:
 ```sql
@@ -62,17 +57,13 @@ CREATE TABLE clients (
 );
 ```
 
-In this example, `client_id` is the primary key that uniquely identifies each client.
+In this example, `client_id` is the primary key that identifies each client.
 
 ### Foreign Keys
 
-Foreign keys establish relationships between tables:
+Foreign keys create relationships between tables. Similar to a person became a foreigner in a country abroad, a record's primary key can be a foreign key in another table (like a passport number from a native country becomes a foreigner identification number in another country). Foreign keys make sure a reference record actually exists in the original table and they prevent orphaned records (records with references to non-existent data).
 
-- A foreign key in one table refers to a primary key in another table
-- Foreign keys enforce referential integrity
-- They prevent orphaned records (records with references to non-existent data)
-
-Example:
+Example
 ```sql
 CREATE TABLE appointments (
     appointment_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -86,10 +77,7 @@ Here, `client_id` in the appointments table is a foreign key that references the
 
 ### Composite Keys
 
-Sometimes, a single column isn't enough to uniquely identify a record. In such cases, we use composite keys:
-
-- A composite key consists of two or more columns
-- The combination of these columns must be unique for each record
+Sometimes, a single column isn't enough to uniquely identify a record. In such cases, we use composite keys. A composite key consists of two or more columns. The combination of these columns must be unique for each record.
 
 Example:
 ```sql
@@ -107,32 +95,70 @@ In this table, neither `program_id` nor `client_id` alone can be a primary key, 
 
 ## Database Schema Design
 
-A database schema is the blueprint of your database structure. Proper schema design is crucial for database performance, data integrity, and future scalability.
+A database schema is the blueprint of your database structure. Proper schema design is important before starting to create database and tables. Database performance, data integrity, and future scalability is better in well-designed databases.
 
 ### Normalization
 
-Normalization is the process of organizing data to minimize redundancy:
+Normalization is like organizing your physical files, with each step making your data more organized and efficient. When you start organizing your physical documents, you separate the mixed-up files into individual folders. Instead of having multiple pieces of information in one cell (like multiple services in one column), we create separate tables where each cell contains only one value. Information stored in multiple records is moved to its own table and referenced when needed.
 
-- **First Normal Form (1NF)**: Eliminate repeating groups and create separate tables for each set of related data
-- **Second Normal Form (2NF)**: Meet 1NF requirements and ensure all non-key attributes depend on the entire primary key
-- **Third Normal Form (3NF)**: Meet 2NF requirements and ensure all attributes depend directly on the primary key
+In practice, there are 3 Normalization forms.
 
-Benefits of normalization:
-- Reduces data redundancy
-- Improves data integrity
-- Makes the database more flexible for queries
+#### First Normalization Form (1NF)
 
-### Denormalization
+In 1NF stage, each column must have only one value (when a client has more than one phone number, the phone number column must store only one number. For another phone number, a new column or a separate table should be created).
 
-Sometimes, we intentionally denormalize (add redundancy) for performance reasons:
 
-- Can improve read performance by reducing joins
-- Useful for reporting databases or data warehouses
-- Trade-off between data integrity and performance
+#### Example of Normalization
 
-### JRS Database Example
+**Before Normalization**
 
-Let's consider how we might structure part of the JRS database:
+| client_id | client_name  | service1       | service1_date | service2       | service2_date | service3       | service3_date | case_manager  | case_manager_phone |
+|-----------|--------------|----------------|---------------|----------------|---------------|----------------|---------------|---------------|-------------------|
+| 1         | John Doe     | Legal Aid      | 2025-01-15    | Food Support   | 2025-02-10    | Housing        | 2025-03-01    | Mary Johnson  | 555-1234          |
+| 2         | Jane Smith   | Medical Care   | 2025-01-20    | Counseling     | 2025-02-15    | NULL           | NULL          | Mary Johnson  | 555-1234          |
+| 3         | Ahmed Hassan | Food Support   | 2025-01-25    | NULL           | NULL          | NULL           | NULL          | James Wilson  | 555-5678          |
+
+In this non-normalized table, there are fixed number of services (what if a client needs 4 services?). There are also Null values when clients have fewer services. Redundant (unnecessarily repeated) case manager information. Finally, it is difficult to query (e.g., "Which clients received Food Support?").
+
+**After Normalization**
+
+*Clients Table (1NF)*
+| client_id | client_name  | case_manager_id |
+|-----------|--------------|-----------------|
+| 1         | John Doe     | 101             |
+| 2         | Jane Smith   | 101             |
+| 3         | Ahmed Hassan | 102             |
+
+> 1NF or First Normal Form stage where repeating information is removed first.
+
+*Services Table (2NF)*
+| service_id | service_name  |
+|------------|---------------|
+| 1          | Legal Aid     |
+| 2          | Food Support  |
+| 3          | Housing       |
+| 4          | Medical Care  |
+| 5          | Counseling    |
+
+*Client_Services Table (3NF)*
+| client_id | service_id | service_date |
+|-----------|------------|--------------|
+| 1         | 1          | 2025-01-15   |
+| 1         | 2          | 2025-02-10   |
+| 1         | 3          | 2025-03-01   |
+| 2         | 4          | 2025-01-20   |
+| 2         | 5          | 2025-02-15   |
+| 3         | 2          | 2025-01-25   |
+
+*Case_Managers Table (3NF)*
+| case_manager_id | case_manager_name | case_manager_phone |
+|-----------------|-------------------|-------------------|
+| 101             | Mary Johnson      | 555-1234          |
+| 102             | James Wilson      | 555-5678          |
+
+With this normalization structure, there is no limits on the number of services per client and no null values for missing services. The case manager information is stored only once. It is easy to query (e.g., "SELECT client_name FROM Clients JOIN Client_Services ON Clients.client_id = Client_Services.client_id WHERE service_id = 2"). And when one data is updated, it is also consistent accross related tables (updating a case manager's phone number only requires changing one record).
+
+### Example
 
 ```
 CLIENTS                           SERVICES
@@ -167,11 +193,7 @@ CLIENTS                           SERVICES
                +------------------+
 ```
 
-This schema demonstrates:
-- Primary keys (PK) that uniquely identify each record
-- Foreign keys (FK) that establish relationships
-- Tables organized by entity type
-- Normalized structure to minimize redundancy
+In this database schema, primary keys (PK) identify each record. Foreign keys (FK) establish relationships. Tables are organized by entity type. And a normalized structure is used to minimize redundancy.
 
 ## Indexes
 
