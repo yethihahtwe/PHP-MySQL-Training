@@ -2,6 +2,10 @@
 
 ## Components of a database
 
+![Fundamental DBMS Concepts](../../resources/images/fundamental_dbms_concepts.png)
+
+Source: Byte Byte Go
+
 ### Tables
 
 Tables are the primary storage components in relational databases. A table as similar to a spreadsheet. Each table stores information about an entity (e.g., clients, services, staff). Tables are composed of rows and columns.
@@ -99,16 +103,19 @@ A database schema is the blueprint of your database structure. Proper schema des
 
 ### Normalization
 
-Normalization is like organizing your physical files, with each step making your data more organized and efficient. When you start organizing your physical documents, you separate the mixed-up files into individual folders. Instead of having multiple pieces of information in one cell (like multiple services in one column), we create separate tables where each cell contains only one value. Information stored in multiple records is moved to its own table and referenced when needed.
-
-In practice, there are 3 Normalization forms.
+Normalization is like organizing your physical files, with each step making your data more organized and efficient. There are 3 Normalization forms in practice.
 
 #### First Normalization Form (1NF)
 
 In 1NF stage, each column must have only one value (when a client has more than one phone number, the phone number column must store only one number. For another phone number, a new column or a separate table should be created).
 
+#### Second Normalization Form (2NF)
 
-#### Example of Normalization
+2NF should follow 1NF. If there are two keys on the same table (composite keys), and other columns directly belongs to only one key, this key and belonging columns should be separated as another table.
+
+#### Third Normalization Form (3NF)
+
+3NF should follow 2NF. If a table still have columns that are not directly related to the primary key, these columns should be separated to a new table. In other words, it is called eliminating the transitive dependencies.
 
 **Before Normalization**
 
@@ -118,20 +125,19 @@ In 1NF stage, each column must have only one value (when a client has more than 
 | 2         | Jane Smith   | Medical Care   | 2025-01-20    | Counseling     | 2025-02-15    | NULL           | NULL          | Mary Johnson  | 555-1234          |
 | 3         | Ahmed Hassan | Food Support   | 2025-01-25    | NULL           | NULL          | NULL           | NULL          | James Wilson  | 555-5678          |
 
-In this non-normalized table, there are fixed number of services (what if a client needs 4 services?). There are also Null values when clients have fewer services. Redundant (unnecessarily repeated) case manager information. Finally, it is difficult to query (e.g., "Which clients received Food Support?").
+In this table, there are exactly three services. If a client needs 4 active services, where should the data be saved? And for clients with only one active service, other service columns are set as NULL. And the case manager name and phone number were repeated for every client. When the case manager switches to another phone number, every line with the previous phone number needs to be updated. This table structure is also difficult to query. e.g. Which clients received food support?
 
 **After Normalization**
 
-*Clients Table (1NF)*
+*Clients Table*
 | client_id | client_name  | case_manager_id |
 |-----------|--------------|-----------------|
 | 1         | John Doe     | 101             |
 | 2         | Jane Smith   | 101             |
 | 3         | Ahmed Hassan | 102             |
 
-> 1NF or First Normal Form stage where repeating information is removed first.
 
-*Services Table (2NF)*
+*Services Table*
 | service_id | service_name  |
 |------------|---------------|
 | 1          | Legal Aid     |
@@ -140,7 +146,7 @@ In this non-normalized table, there are fixed number of services (what if a clie
 | 4          | Medical Care  |
 | 5          | Counseling    |
 
-*Client_Services Table (3NF)*
+*Client_Services Table*
 | client_id | service_id | service_date |
 |-----------|------------|--------------|
 | 1         | 1          | 2025-01-15   |
@@ -150,7 +156,7 @@ In this non-normalized table, there are fixed number of services (what if a clie
 | 2         | 5          | 2025-02-15   |
 | 3         | 2          | 2025-01-25   |
 
-*Case_Managers Table (3NF)*
+*Case_Managers Table*
 | case_manager_id | case_manager_name | case_manager_phone |
 |-----------------|-------------------|-------------------|
 | 101             | Mary Johnson      | 555-1234          |
@@ -197,19 +203,11 @@ In this database schema, primary keys (PK) identify each record. Foreign keys (F
 
 ## Indexes
 
-Indexes improve the speed of data retrieval operations:
+Indexes improve the speed of data query. They are similar to an index in a book. Index increases read performance, but may slow down writes. They should be created on columns frequently used in WHERE clauses, joins, and sorting.
 
-- Similar to an index in a book
-- Increases read performance, but may slow down writes
-- Should be created on columns frequently used in WHERE clauses, joins, and sorting
+Types of indexes include **Primary key index** which are automatically created for primary keys, **Unique index** to ensure all values in a column are unique, **Composite index**: Index on multiple columns, and **Full-text index** for text searching.
 
-Types of indexes:
-- **Primary key index**: Automatically created for primary keys
-- **Unique index**: Ensures all values in a column are unique
-- **Composite index**: Index on multiple columns
-- **Full-text index**: For text searching
-
-Example:
+Example
 ```sql
 CREATE INDEX idx_client_nationality ON clients(nationality);
 ```
@@ -218,13 +216,13 @@ This creates an index on the nationality column to speed up queries that filter 
 
 ## Constraints
 
-Constraints enforce rules on data to maintain integrity:
+Constraints enforce rules on data to maintain integrity.
 
-- **NOT NULL**: Ensures a column cannot have NULL values
-- **UNIQUE**: Ensures all values in a column are distinct
-- **CHECK**: Ensures values meet specified conditions
-- **DEFAULT**: Provides a default value when none is specified
-- **FOREIGN KEY**: Ensures referential integrity
+- **NOT NULL** constraint ensures a column cannot have NULL values
+- **UNIQUE** constraint ensures all values in a column are unique
+- **CHECK** constraint ensures values meet specified conditions
+- **DEFAULT** constraint provides a default value when none is specified
+- **FOREIGN KEY** ensures reference integration
 
 Example:
 ```sql
@@ -240,15 +238,9 @@ CREATE TABLE clients (
 
 ## Summary
 
-In this lesson, we've covered:
-- The fundamental structures of relational databases (tables, columns, rows)
-- Different data types and when to use them
-- The importance of keys in establishing relationships and ensuring data integrity
-- Basic principles of database schema design
-- How indexes can improve query performance
-- Constraints that help maintain data integrity
+In this lesson, we've covered the fundamental structures of relational databases (tables, columns, rows), different data types and when to use them, the importance of keys in establishing relationships and ensuring data integrity, basic principles of database schema design, how indexes can improve query performance, constraints that help maintain data integrity.
 
-Understanding these structures will help you design and interact with databases effectively, making it easier to manage and retrieve the information needed for JRS operations.
+Understanding these structures will help you design and interact with databases effectively, making it easier to manage and retrieve the information needed for operations.
 
 ## Resources
 - [Database Normalization Explained](https://www.essentialsql.com/get-ready-to-learn-sql-database-normalization-explained-in-simple-english/)
@@ -256,7 +248,7 @@ Understanding these structures will help you design and interact with databases 
 - [Database Indexing Strategies](https://use-the-index-luke.com/)
 
 ## Exercises
-1. Identify three entities (tables) that might exist in the JRS database and list potential columns for each.
+1. Identify three entities (tables) that might exist in your database and list potential columns for each.
 2. For each table identified in Exercise 1, determine appropriate primary keys and any potential foreign keys.
-3. Choose appropriate data types for 5 different pieces of information that JRS might collect about clients.
+3. Choose appropriate data types for 5 different pieces of information that might collect about clients.
 4. Consider a table that stores client case notes. What indexes might improve performance when searching through this data?
