@@ -247,3 +247,84 @@ $is_eligible = ($age >= 18 && $has_id = true) || $special_exemption = true;
 ```
 
 When you're in doubt, you can add parentheses to make complex conditions become clear. This not only makes the code more readable but also makes sure the code works as expected.
+
+## Examples
+
+### Calculating available slots for a training program
+
+```php
+<?php
+// Total planned participants
+$total_capacity = 50;
+
+// Current puglic registration
+$current_public_registration = 32;
+
+// Number of seats occupied by staff
+$staff_attending = 5;
+
+// Reserved seats for emergencies
+$emergency_seats = 3;
+
+// Available seats
+$available_seats = $total_capacity - $current_public_registration - $staff_attending - $emergency_seats;
+
+echo "Available seats for public registration - " . $available_seats;
+?>
+```
+
+### Determining eligibility for assistance
+
+```php
+<?php
+// Client details
+$family_size = 5;
+$monthly_income = 1200;
+$has_children_under_18 = true;
+$is_single_parent = false;
+
+// Assistance criteria
+$income_threshold = 2000;
+$income_per_person_threshold = 500;
+
+// Income per person
+$income_per_person = $monthly_income / $family_size;
+
+// Check eligibility based on criteria
+$is_eligible = ($monthly_income < $income_threshold) && ($income_per_person < $income_per_person_threshold) && ($has_children_under_18 || $is_single_parent);
+
+if ($is_eligible) {
+    echo "Client is eligible for the assistance program.";
+} else {
+    echo "Client does not meet all specified criteria of the assistance program.";
+}
+?>
+```
+
+## Summary
+
+In this lesson, we have covered -
+* Arithmetic operators that can perform mathematical operations
+* Assignment operators for assigning values to variables
+* Comparison operators for checking conditions
+* Increment/Decrement operators for adding/substracting value by one
+* Logical operators for combining conditions
+* String operators for combining text
+* Operator precedence and the role of parentheses
+
+## Resources
+
+* [PHP Operators Documentation](https://www.php.net/manual/en/language.operators.php)
+* [W3Schools PHP Operators Tutorial](https://www.w3schools.com/php/php_operators.asp)
+* [PHP Operator Precedence Table](https://www.php.net/manual/en/language.operators.precedence.php)
+
+## Exercises
+
+1. Create a script to check whether a client is eligible for an assistance program based on the following criteria.
+    * The client must be either above 65 years old **OR** under 18.
+    * **AND** the client must have been registered in your system for at least 30 days.
+    * **AND** the client must not have participated in any other assistance program in the last 90 days.
+
+2. Write a script to display a confirmation message for a workshop registration including participant's name, workshop title, date and location.
+
+3. Create a script to calculate the following scenerio. Your organization is going to create volunteer teams with 5 volunteers per team. You have 37 volunteers currently. How many teams of 5 volunteers can you create? How many people will be left without forming a full team?
