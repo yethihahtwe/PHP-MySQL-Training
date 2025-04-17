@@ -145,21 +145,23 @@ Increment and decrement operators are used to increase or decrease the values of
 
 ```php
 <?php
-$x = 5;
-echo ++$x; // $x is incremented then returned as 6
-echo $x; // 6
+// Post increment
+$attendees = 5;
+echo $attendees++; // The result is 5, then incremented to 6
+echo $attendees; // The result is 6
 
-$y = 5;
-echo $y++; // $y is returned as 5 then incremented
-echo $y; // 6
+// Pre increment
+$staff = 8;
+echo ++$staff; // Incremented to 9 then result is 9
 
-$a = 5;
-echo --$a; // $a is decremented and returned as 4
-echo $a; // 4
+// Post decrement
+$available_meeting_rooms = 3;
+echo $available_meeting_rooms--; // The result is 3, then decremented to 2
+echo $available_meeting_rooms; // The result is 2
 
-$b = 5;
-echo $b--; // $b is returned as 5 an decremented
-echo $b; // 4
+// Post increment
+$shortlisted_candidates = 15;
+echo --$shortlisted_candidates; // Decremented to 14, the result is 14
 ?>
 ```
 
@@ -176,27 +178,72 @@ Logical operators are used to combine conditional statements.
 | &#124;&#124; | Or | $x &#124;&#124; $y | True if either $x or $y is true |
 
 ```php
+// AND (&&)
+$is_eligible = ($age >= 18 && $has_id == true); // True if both conditions are true
+
+// OR (||)
+$can_register = ($is_migrant_worker || $is_influx); // True if either condition is true
+
+// NOT (!)
+$pending_registration = !$form_submitted; // True if $form_submitted is false
+
+// Example
+$age = 25;
+$has_id = true;
+
+if ($age >= 18 && $has_id) {
+    echo "You are eligible for this program.";
+} else {
+    echo "Sorry, you are not eligible for this program."
+}
 
 ```
-> **Note:** The `and` and `or` operators have lower priority than `&&` and `||`.
-> It is safer to use `&&` and `||` to avoid unexpected behavior.
+
+### String operators
+
+PHP has two string operators. The concatenation operator `.` joins two strings values together. The concatenation assignment operator `.=` appends the right string value to the left.
 
 ```php
 <?php
-// user input validation
-$username = $_POST['username']; // get data from a form field
-$password = $_POST['password']; // get data from a form field
+$first_name = "Anton";
+$last_name = "Chekhov";
+$full_name = $first_name . " " . $last_name;
+echo $full_name; // Anton Chekhov
 
-// && is used here
-$isValid = !empty($username) && strlen($password) >= 8;
-if ($isValid) {
-    // continue with login
-}
+$email_body = "Dear ";
+$email_body .= $full_name; // The same as $email_body = $email_body . $full_name
+$email_body .= ",\n\nThank you for your registration.";
+echo $email_body;
 
-// "and" is used here
-$isValid = !empty($username) and strlen($password) >= 8;
-// This will only be interpreted as ($isValid = !empty($username)) and strlen($password) >= 8
-// So $isValid only takes care of !empty($username)
+/*
+Dear Anton Chekhov,
+
+Thank you for your registration.
+*/
 ?>
 ```
 
+### Operator precedence
+
+Just like in mathematical calculations, PHP also has rules on which operators are going to be implemented first when different operators are used together. This is called operator precedence.
+
+```php
+<?php
+// Without parentheses
+$result = 5 + 3 * 2; // Multiplication implemented first as 3 * 2 = 6. Then addition 5 + 6 = 11
+$echo $result;
+
+// With parentheses
+$result = (5 + 3) * 2; // Addition first 5 + 3 = 8. Then multiplied as 8 * 2 = 16
+$echo $result;
+
+// We can also use parentheses for complex logical conditions
+// The condition is complex and prone to unexpected results
+$is_eligible = $age >= 18 && $has_id = true || $special_exemption = true;
+
+// Parentheses can be added for more clarity
+$is_eligible = ($age >= 18 && $has_id = true) || $special_exemption = true;
+?>
+```
+
+When you're in doubt, you can add parentheses to make complex conditions become clear. This not only makes the code more readable but also makes sure the code works as expected.
