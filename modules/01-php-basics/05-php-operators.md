@@ -1,8 +1,10 @@
 ## PHP Operators
 PHP operators are symbols to create mathematical, relational or logical operations.
 
+![PHP Operators](../../resources/images/php-operators.svg)
+
 ### Arithmetic Operators
-Arithmetic operators perform mathematical operations.
+Arithmetic operators perform mathematical operations. These are probably familiar to you from basic math.
 
 | Operator | Description | Example | Output |
 |----------|-------------|---------|--------|
@@ -15,20 +17,32 @@ Arithmetic operators perform mathematical operations.
 
 ```php
 <?php
-$a = 10;
-$b = 3;
+// Addition
+$total_clients = 5 + 3; // $total_clients equals 8
 
-echo $a + $b; // 13
-echo $a - $b; // 7
-echo $a * $b; // 30
-echo $a / $b; // 3.3333...
-echo $a % $b; // 1
-echo $a ** $b; // 1000
+// Subtraction
+$remaining_bookings = 20 - 7; // $remaining_bookings equals 13
+
+// Multiplication
+$total_hours = 5 * 3; // $total_hours equals 15
+
+// Division
+$average_score = 100 / 4; // $average_score equals 25
+
+// Modulus (remainder after division)
+$remainder = 10 % 3; // $remainder equals 1
+
+// Exponentiation (power of)
+$squared = 4 ** 2; // $squared equals 16
 ?>
 ```
 
+The modulus operator `%` gives you the remainder after division. For example, when dividing 10 by 3, you get 3 with a remainder of 1. The modulus operation returns just that remainder (1). This can be useful for determining if a number is even or odd, or for cycling through a range of values.
+
+The exponentiation operator `**` raises the left operand to the power of the right. So `4 ** 2` means 4 raised to the power of 2, which equals 16.
+
 ### Assignment operators
-Assignment operators assign values to a variable.
+Assignment operators assign values to a variable. The basic assignment operator is `=` which assigns the value on the right to the variable on the left.
 
 | Operator | Description | Example | Output |
 |----------|-------------|---------|--------|
@@ -42,15 +56,29 @@ Assignment operators assign values to a variable.
 
 ```php
 <?php
-$x = 10;
-$x += 5; // $x is now 15
-$x -= 3; // $x is now 12
-$x *= 2; // $x is now 24
-$x /= 4; // $x is now 6
-$x %= 4; // $x is now 2
+// Basic assignment
+$project_name = "Community Health Initiative";
 
-$name = "David";
-$name .= " Beckham"; // $name is now "David Beckham"
+// Combined assignment operators
+$total_beneficiaries = 200;
+$total_beneficiaries += 50; // Same as: $total_beneficiaries = $total_beneficiaries + 50
+// $total_beneficiaries now equals 250
+
+$available_slots = 30;
+$available_slots -= 5; // Same as: $available_slots = $available_slots - 5
+// $available_slots now equals 25
+
+$monthly_sessions = 4;
+$monthly_sessions *= 3; // Same as: $monthly_sessions = $monthly_sessions * 3
+// $monthly_sessions now equals 12
+
+$team_size = 12;
+$team_size /= 3; // Same as: $team_size = $team_size / 3
+// $team_size now equals 4
+
+$leftover_supplies = 22;
+$leftover_supplies %= 5; // Same as: $leftover_supplies = $leftover_supplies % 5
+// $leftover_supplies now equals 2
 ?>
 ```
 
@@ -72,80 +100,38 @@ Comparison operators compare two values and return a boolean (true or false).
 
 ```php
 <?php
-$a = 10;
-$b = "10";
-$c = 5;
+// Equal
+$is_same = (5 == "5"); // Returns true because the values are equal, regardless of type
 
-var_dump($a == $b); // true
-var_dump($a === $b); // false
-var_dump($a != $c); // true
-var_dump($a !== $c); // true
-var_dump($a > $c); // true
-var_dump($a < $c); // false
-var_dump($a >= $b); // true
-var_dump($a <=> $c); // 1
+// Identical
+$is_identical = (5 === "5"); // Returns false because the types are different (integer vs string)
+
+// Not equal
+$is_not_equal = (5 != 10); // Returns true because 5 is not equal to 10
+
+// Not identical
+$is_not_identical = (5 !== "5"); // Returns true because they are not identical
+
+// Greater than
+$is_greater = (10 > 5); // Returns true
+
+// Less than
+$is_less = (3 < 7); // Returns true
+
+// Greater than or equal to
+$is_greater_equal = (10 >= 10); // Returns true
+
+// Less than or equal to
+$is_less_equal = (5 <= 10); // Returns true
+
+// Spaceship operator (returns -1, 0, or 1)
+$comparison = (5 <=> 10); // Returns -1 because 5 is less than 10
+$comparison = (10 <=> 10); // Returns 0 because 10 equals 10
+$comparison = (15 <=> 10); // Returns 1 because 15 is greater than 10
 ?>
 ```
 
-### Logical Operators
-Logical operators are used to combine conditional statements.
-
-| Operator | Description | Example | Output |
-|----------|-------------|---------|--------|
-| and | And | $x and $y | True if both $x and $y are true |
-| or | Or | $x or $y | True if either of $x or $y is true |
-| xor | Exclusive or | $x xor $y | True if either $x or $y is true, but not both |
-| ! | Not | !$x | True if $x is not true |
-| && | And | $x && $y | True if both $x and $y are true |
-| &#124;&#124; | Or | $x &#124;&#124; $y | True if either $x or $y is true |
-
-```php
-<?php
-$a = true;
-$b = false;
-
-var_dump($a && $b); // false
-var_dump($a || $b); // true
-var_dump($a and $b); // false
-var_dump($a or $b); // true
-var_dump($a xor $b); // true
-var_dump(!$a); // false
-
-// Example
-$user_is_logged_in = true;
-$is_admin = false;
-
-if ($user_is_logged_in && $is_admin) {
-    echo "Welcome, Admin!";
-} elseif ($user_is_logged_in) {
-    echo "Welcome, User!";
-} else {
-    echo "Please log in.";
-}
-// Output - "Welcome User!"
-?>
-```
-> **Note:** The `and` and `or` operators have lower priority than `&&` and `||`.
-> It is safer to use `&&` and `||` to avoid unexpected behavior.
-
-```php
-<?php
-// user input validation
-$username = $_POST['username']; // get data from a form field
-$password = $_POST['password']; // get data from a form field
-
-// && is used here
-$isValid = !empty($username) && strlen($password) >= 8;
-if ($isValid) {
-    // continue with login
-}
-
-// "and" is used here
-$isValid = !empty($username) and strlen($password) >= 8;
-// This will only be interpreted as ($isValid = !empty($username)) and strlen($password) >= 8
-// So $isValid only takes care of !empty($username)
-?>
-```
+The `==` operators checks whether two values are equal, no matter what their types are. The `===` operator checks both value and type. The spaceship operator `<=>` was added since php7. If the left side is smaller, it returns `-1`. If they're equal returns `0`. If the left side is greater, returns `1`. This is useful for sorting functions.
 
 ### Increment/Decrement operators
 Increment and decrement operators are used to increase or decrease the values of a variable.
@@ -176,3 +162,41 @@ echo $b--; // $b is returned as 5 an decremented
 echo $b; // 4
 ?>
 ```
+
+### Logical Operators
+Logical operators are used to combine conditional statements.
+
+| Operator | Description | Example | Output |
+|----------|-------------|---------|--------|
+| and | And | $x and $y | True if both $x and $y are true |
+| or | Or | $x or $y | True if either of $x or $y is true |
+| xor | Exclusive or | $x xor $y | True if either $x or $y is true, but not both |
+| ! | Not | !$x | True if $x is not true |
+| && | And | $x && $y | True if both $x and $y are true |
+| &#124;&#124; | Or | $x &#124;&#124; $y | True if either $x or $y is true |
+
+```php
+
+```
+> **Note:** The `and` and `or` operators have lower priority than `&&` and `||`.
+> It is safer to use `&&` and `||` to avoid unexpected behavior.
+
+```php
+<?php
+// user input validation
+$username = $_POST['username']; // get data from a form field
+$password = $_POST['password']; // get data from a form field
+
+// && is used here
+$isValid = !empty($username) && strlen($password) >= 8;
+if ($isValid) {
+    // continue with login
+}
+
+// "and" is used here
+$isValid = !empty($username) and strlen($password) >= 8;
+// This will only be interpreted as ($isValid = !empty($username)) and strlen($password) >= 8
+// So $isValid only takes care of !empty($username)
+?>
+```
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="400" fill="white"/>
+    
+    <!-- Title -->
+    <text x="400" y="40" font-family="Montserrat, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">PHP Operators Overview</text>
+    
+    <!-- Operator Categories -->
+    <!-- Arithmetic -->
+    <rect x="50" y="80" width="200" height="100" rx="10" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+    <text x="150" y="110" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Arithmetic</text>
+    <text x="150" y="140" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">+ - * / %</text>
+    <text x="150" y="160" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">Addition, Subtraction</text>
+    
+    <!-- Comparison -->
+    <rect x="300" y="80" width="200" height="100" rx="10" fill="#e6ffe6" stroke="#009900" stroke-width="2"/>
+    <text x="400" y="110" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Comparison</text>
+    <text x="400" y="140" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">== === != !== &lt; &gt;</text>
+    <text x="400" y="160" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">Equal, Not Equal</text>
+    
+    <!-- Assignment -->
+    <rect x="550" y="80" width="200" height="100" rx="10" fill="#fff2e6" stroke="#ff9933" stroke-width="2"/>
+    <text x="650" y="110" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Assignment</text>
+    <text x="650" y="140" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">= += -= *= /=</text>
+    <text x="650" y="160" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">Assign values</text>
+    
+    <!-- Logical -->
+    <rect x="50" y="220" width="200" height="100" rx="10" fill="#ffe6e6" stroke="#cc0000" stroke-width="2"/>
+    <text x="150" y="250" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Logical</text>
+    <text x="150" y="280" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">AND OR NOT</text>
+    <text x="150" y="300" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">Combine conditions</text>
+    
+    <!-- Increment/Decrement -->
+    <rect x="300" y="220" width="200" height="100" rx="10" fill="#f2e6ff" stroke="#6600cc" stroke-width="2"/>
+    <text x="400" y="250" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Increment/Decrement</text>
+    <text x="400" y="280" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">++ --</text>
+    <text x="400" y="300" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">Add or subtract one</text>
+    
+    <!-- String -->
+    <rect x="550" y="220" width="200" height="100" rx="10" fill="#e6ffff" stroke="#00cccc" stroke-width="2"/>
+    <text x="650" y="250" font-family="Montserrat, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">String</text>
+    <text x="650" y="280" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">. .=</text>
+    <text x="650" y="300" font-family="Montserrat, sans-serif" font-size="14" text-anchor="middle">Concatenate strings</text>
+    
+    <!-- Bottom Note -->
+    <text x="400" y="370" font-family="Montserrat, sans-serif" font-size="14" font-style="italic" text-anchor="middle">Operators are the building blocks for creating expressions in PHP</text>
+</svg>
