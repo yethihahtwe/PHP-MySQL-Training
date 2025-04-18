@@ -239,10 +239,10 @@ $echo $result;
 
 // We can also use parentheses for complex logical conditions
 // The condition is complex and prone to unexpected results
-$is_eligible = $age >= 18 && $has_id = true || $special_exemption = true;
+$is_eligible = $age >= 18 && $has_id == true || $special_exemption == true;
 
 // Parentheses can be added for more clarity
-$is_eligible = ($age >= 18 && $has_id = true) || $special_exemption = true;
+$is_eligible = ($age >= 18 && $has_id == true) || $special_exemption == true;
 ?>
 ```
 
